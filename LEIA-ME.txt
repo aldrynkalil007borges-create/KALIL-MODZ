@@ -1,0 +1,6 @@
+KALIL MODZ — visual inspirado na referência enviada.
+Painel compacto no lado direito, cabeçalho azul/ciano, fundo preto,
+barra lateral de ícones e conteúdo por abas. Arraste o cabeçalho para mover.
+Projeto-fonte Android; não é APK compilado. Para gerar APK, abra no Android Studio
+ou ambiente Android compatível e use Build > Build APK.
+As opções são demonstrações visuais e não modificam nem automatizam o Free Fire.
