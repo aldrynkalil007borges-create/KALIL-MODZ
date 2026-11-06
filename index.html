@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUXÍLIO MODZ</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#100000;color:white;font-family:Arial,sans-serif;text-align:center;padding:22px}
+h1{color:#ff2424;text-shadow:0 0 15px red}
+.card{max-width:420px;margin:20px auto;padding:22px;background:#210606;border:1px solid #a90000;border-radius:16px;box-shadow:0 0 18px #650000}
+input,select{width:100%;padding:14px;margin:9px 0;background:#100000;color:white;border:1px solid #c00000;border-radius:9px}
+button{width:100%;padding:13px;margin:7px 0;background:#d00000;color:white;border:0;border-radius:9px;font-weight:bold}
+button:active{background:#850000}
+.option{background:#300909;border:1px solid #a00000;padding:13px;margin:9px;border-radius:9px}
+small{color:#ffaaaa}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<h1>🔥 AUXÍLIO MODZ 🔥</h1>
+<p>PAINEL DE PERSONALIZAÇÃO</p>
+
+<div class="card" id="login">
+<h3>🔑 ATIVAÇÃO</h3>
+<input id="key" placeholder="Digite sua Key">
+<button onclick="ativar()">ATIVAR AUXÍLIO</button>
+<p id="msg"></p>
+<hr>
+<h3>👑 ACESSO ADMIN</h3>
+<input id="senha" type="password" placeholder="Senha do administrador">
+<button onclick="admin()">ENTRAR NO ADMIN</button>
+</div>
+
+<div class="card hidden" id="admin">
+<h2>👑 ADMIN</h2>
+<select id="validade">
+<option value="1">1 hora</option>
+<option value="24">1 dia</option>
+<option value="720">1 mês (30 dias)</option>
+<option value="0">Permanente</option>
+</select>
+<button onclick="gerar()">GERAR KEY</button>
+<p id="novaKey"></p>
+<button onclick="sairAdmin()">SAIR DO ADMIN</button>
+</div>
+
+<div class="card hidden" id="painel">
+<h2>PAINEL ATIVADO 🔥</h2>
+<div class="option">＋ Mira personalizada</div>
+<div class="option">🎯 Ajuste visual da mira</div>
+<div class="option">🔘 Tamanho do botão de tiro
+<input type="range" min="20" max="100" value="50">
+</div>
+<div class="option">📱 Painel flutuante (visual)</div>
+<div class="option">🎨 Cor da mira
+<input type="color" value="#ff0000">
+</div>
+<div class="option">⚡ FPS e desempenho (informações)</div>
+<button onclick="ocultar()">OCULTAR PAINEL</button>
+</div>
+
+<button id="mostrar" class="hidden" onclick="mostrarPainel()">MOSTRAR PAINEL</button>
+
+<script>
+const SENHA_ADMIN="Kalil#MODZ_9Vx!2026";
+const KEY_TESTE="KALIL-DEMO-2026";
+
+function ativar(){
+ const k=document.getElementById("key").value.trim();
+ if(k===KEY_TESTE || localStorage.getItem("key_"+k)){
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("painel").classList.remove("hidden");
+ }else{
+  document.getElementById("msg").textContent="Key inválida!";
+ }
+}
+
+function admin(){
+ if(document.getElementById("senha").value===SENHA_ADMIN){
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("admin").classList.remove("hidden");
+ }else alert("Senha incorreta!");
+}
+
+function gerar(){
+ const letras="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+ let k="KALIL-";
+ for(let i=0;i<10;i++) k+=letras[Math.floor(Math.random()*letras.length)];
+ const horas=Number(document.getElementById("validade").value);
+ localStorage.setItem("key_"+k,JSON.stringify({
+  validade:horas,
+  criada:Date.now()
+ }));
+ document.getElementById("novaKey").textContent=k;
+}
+
+function sairAdmin(){
+ document.getElementById("admin").classList.add("hidden");
+ document.getElementById("login").classList.remove("hidden");
+}
+function ocultar(){
+ document.getElementById("painel").classList.add("hidden");
+ document.getElementById("mostrar").classList.remove("hidden");
+}
+function mostrarPainel(){
+ document.getElementById("mostrar").classList.add("hidden");
+ document.getElementById("painel").classList.remove("hidden");
+}
+</script>
+</body>
+</html>
